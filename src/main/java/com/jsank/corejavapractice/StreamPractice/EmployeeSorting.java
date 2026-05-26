@@ -6,6 +6,8 @@ import lombok.Setter;
 
 import java.lang.reflect.Array;
 import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -45,10 +47,22 @@ public class EmployeeSorting {
 //        sortedSalary.forEach(emp -> System.out.println(emp.salary));
 //        System.out.println(sortedSalary);
 
-        OptionalDouble avg = employeeList.stream().mapToInt(emp -> emp.getAge()).average();
+        OptionalDouble avg = employeeList.stream().mapToInt(Employees::getAge).average();
 
-        System.out.println(avg);
+//        System.out.println(avg);
 
+          sortedSalary.stream().collect(Collectors.groupingBy(Employees::getDepartment, Collectors.averagingDouble(Employees::getSalary)));
+
+          sortedSalary.stream().collect(Collectors.groupingBy(Employees::getDepartment,Collectors.maxBy(Comparator.comparing(Employees::getSalary))));
+
+          Set<String> freq = sortedSalary.stream().collect(Collectors.groupingBy(Employees::getDepartment, Collectors.counting()))
+                  .entrySet().stream().filter(enty -> enty.getValue() > 1).map(e -> e.getKey()).collect(Collectors.toSet());
+
+        System.out.println(freq);
+
+        sortedSalary.stream().collect(Collectors.groupingBy(Employees::getDepartment, Collectors.groupingBy(emp -> emp.getSalary() > 80000)));
+
+        sortedSalary.stream().collect(Collectors.groupingBy(employees -> employees.getDepartment()));
 
     }
 }

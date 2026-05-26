@@ -8,7 +8,9 @@ public class BasicStream {
     public static void main(String[] args) {
         List<Integer> list = Arrays.asList(1,2,3,4,5,6,7,8,9);
 
-        list.stream().collect(Collectors.partitioningBy())
+        Map<Boolean, List<Integer>> partedList = list.stream().collect(Collectors.partitioningBy(n -> n % 2 == 0));
+
+        System.out.println(partedList.get(false));
 
         List<Integer> list2 = List.of(11,22,33,44,55,66,77,88);
 
@@ -77,9 +79,9 @@ public class BasicStream {
                 Arrays.asList(31,32,33,34)
         );
 
-        List<Integer> flatternList = listOfList.stream().flatMap(arr -> arr.stream()).toList();
+        List<Integer> flattenList = listOfList.stream().flatMap(arr -> arr.stream()).toList();
 
-        System.out.println(flatternList);
+        System.out.println(flattenList);
 
     }
 }
