@@ -12,28 +12,28 @@ public class TwoSum {
 
         int[] indexes = new int[2];
 
-//        for (int i = 1; i < nums.length; i++){
-//
-//            for (int j = 0; j < i; j++){
-//                if(nums[j] + nums[i] == target){
-//                    indexes[0] = j;
-//                    indexes[1] = i;
-//                }
-//            }
-//        }
-
-        Map<Integer ,Integer> map = new HashMap<>();
-
-        for (int i = 1; i < nums.length; i++) {
-            int remain = target - nums[i];
-
-            if (map.containsKey(remain)){
-                indexes[0] = map.get(remain);
-                 indexes[1] = i;
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[i] + nums[j] == target){
+                    indexes[0] = i;
+                    indexes[1] = j;
+                    break;
+                }
             }
-
-            map.put(nums[i], i);
         }
+
+//        Map<Integer ,Integer> map = new HashMap<>();
+//
+//        for (int i = 1; i < nums.length; i++) {
+//            int remain = target - nums[i];
+//
+//            if (map.containsKey(remain)){
+//                indexes[0] = map.get(remain);
+//                 indexes[1] = i;
+//            }
+//
+//            map.put(nums[i], i);
+//        }
 
         return indexes;
     };

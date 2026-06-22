@@ -47,6 +47,8 @@ public class EmployeeSorting {
 //        sortedSalary.forEach(emp -> System.out.println(emp.salary));
 //        System.out.println(sortedSalary);
 
+        employeeList.stream().sorted(Comparator.comparing(Employees::getAge).reversed()).toList();
+
         OptionalDouble avg = employeeList.stream().mapToInt(Employees::getAge).average();
 
 //        System.out.println(avg);
